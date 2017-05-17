@@ -26,4 +26,5 @@ public class MessageType {
     public static final int BASIC_REPORT = 0x1E;
     public static final int LONG_REPORT = 0x1F;
     public static final int DEVICE_REPORT = 0x7A;
+    public static final int AHRS_REPORT = 0x4c;
 }

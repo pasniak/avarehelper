@@ -89,7 +89,11 @@ public class MessageFactory {
             case MessageType.DEVICE_REPORT:
                 m = new DeviceReportMessage();
                 break;
-                
+
+            case MessageType.AHRS_REPORT:
+                m = new AhrsMessage();
+                break;
+
             default:
                 m = null;
                 break;
