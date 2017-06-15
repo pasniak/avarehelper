@@ -12,6 +12,7 @@ Redistribution and use in source and binary forms, with or without modification,
 
 package com.apps4av.avarehelper.connections;
 
+import com.apps4av.avarehelper.gdl90.AhrsMessage;
 import com.apps4av.avarehelper.gdl90.BasicReportMessage;
 import com.apps4av.avarehelper.gdl90.Constants;
 import com.apps4av.avarehelper.gdl90.FisBuffer;
@@ -131,8 +132,27 @@ public class BufferProcessor {
             /*
              * Post on UI thread.
              */
+            if(m instanceof AhrsMessage) {
+                
+                JSONObject object = new JSONObject();
+                AhrsMessage tm = (AhrsMessage)m;
+                try {
+                    object.put("type", "ahrs");
+                    object.put("pitch", (double)tm.mPitch);
+                    object.put("roll", (double)tm.mRoll);
+                    object.put("heading", (double)tm.mHeading);
+                    object.put("slip", (double)tm.mSlip);
+                    object.put("yaw", (double)tm.mYaw);
+                    object.put("gs", (double)tm.mGs);
+                } catch (JSONException e1) {
+                    continue;
+                }
+
+                objs.add(object.toString());
+
+            }    
             
-            if(m instanceof TrafficReportMessage) {
+            else if(m instanceof TrafficReportMessage) {
                 
                 /*
                  * Make a GPS locaiton message from ADSB ownship message.

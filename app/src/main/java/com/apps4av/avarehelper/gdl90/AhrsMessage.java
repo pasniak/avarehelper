@@ -21,7 +21,7 @@ public class AhrsMessage extends Message {
 
     @Override
     protected void parse(byte[] msg) {
-        // gased on makeAHRSGDL90Report in  stratux/main/gps.go 
+        // gased on makeAHRSGDL90Report in https://github.com/cyoung/stratux/blob/ahrs_dev/main/gps.go
         int roll = (((int)msg[3]) << 8) + (msg[4] & 0xFF);
         int pitch = (((int)msg[5]) << 8) + (msg[6] & 0xFF);
         int heading = (((int)msg[7]) << 8) + (msg[8] & 0xFF);
@@ -35,9 +35,9 @@ public class AhrsMessage extends Message {
         mYaw = yaw / 10f;
         mGs = gs / 10f;
 
-        Logger.Logit("AHRS roll=" + r(mRoll) + " pitch=" + r(mPitch) +
-                " heading=" + r(mHeading) + " slip=" + r(mSlip) + " yaw=" + r(mYaw) +
-                " Gs=" + mGs);
+        /*Logger.Logit("AHRS roll=" + r(mRoll) + " pitch=" + r(mPitch) +
+                " hdg=" + r(mHeading) + " slip=" + r(mSlip) + " yaw=" + r(mYaw) +
+                " Gs=" + r(mGs) + " PA=" + r(mPA));*/
     }
     
     double r(float f) { return Math.round(f*100)/100; }
